@@ -34,9 +34,9 @@ class History:
     def __init__(self,route):
         self.establishAuction(route)
 
-    def establishAuction(self,route:
+    def establishAuction(self,route):
         self.auction = Auction()
-        for bid in option:
+        for bid in route:
             auction.nextBid(bid) #bid is a tuple representing (level, suit) or (Pass, Pass) (or DBL DBL but this is irrelevant for our purposes against passive agents in flow chart form)
             auction.nextBid((PASS,PASS)) #playing against passive opponents
 
