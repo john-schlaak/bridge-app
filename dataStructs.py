@@ -14,7 +14,16 @@ class BidNode:
         
         # self.rules is a set of rules for selecting a next bid based on some criterion provided and history however "history" is a somewhat intrinsic property to the bid ID
         # these are passed in the form of the rules dict which contains a list of rules.  each rule has a set of constraints
-
+        
+    def outputMermaid(self):
+        pass
+        # todo: output the mermaid syntax surrounding this node.  alternatively, create another datastructure, i.e. a graph data structure
+        # this would consist of BidNodes, each of which would have multiple rules (which are edges) pointing to bidNodes with higher bids (and higher bid ID's)
+        # the histories are an intrinsic property.  that is to say, the histories are all the possible back traversals along the tree to the root node
+        # this gives us:
+        #   a tree with many nodes each with a distinct ID, some may have identical bids (but different meanings);
+        #   a list of edges going from each node to other nodes, I.e rules, and multiple rules can point to the same node, but rules are never circular; the tree traverses downward, though nodes can be skipped and there can be multiple nodes (with different id's) at the same bid level.  there are 35 bids so the max depth of the tree is 35 but thats somewhat unlikely.  basically ignore this for now, and I'm not sure why you scrolled all the way over here, who writes obnoxiously long comments like this?
+        #   this then has to be parsed into mermaid input
 
 class Rule:
 
