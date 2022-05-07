@@ -2,7 +2,7 @@
 name = "bridge-app"
 version = "0.1.0"
 description = ""
-authors = ["ThisIsAName12345 <schlaakja@gmail.com>"]
+authors = ["John Schlaak <schlaakja@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
