@@ -12,7 +12,7 @@ class BidNode:
         for hist in historiesDict:
             self.histories.append(History(hist))
         
-        #nexts are a set of rules for selecting a next bid based on some criterion provided and history.
+        # self.rules is a set of rules for selecting a next bid based on some criterion provided and history however "history" is a somewhat intrinsic property to the bid ID
         # these are passed in the form of the rules dict which contains a list of rules.  each rule has a set of constraints
 
 
@@ -27,17 +27,17 @@ class Rule:
         self.TPMax = min(37,constraints["TPMax"])
         self.TPMin = max(0,constraints["TPMin"])
         self.keycards = constraints["keycards"] #set of sets — sets can be of size one card, or size many.  Specifies suit and rank
-        self.kcMins = constraints["keycardMinimums"]
+        self.kcMins = constraints["keycardMinimums"] #minimum number of key cards from each set necessary to be consistent with the bid this rule points to
 
 class History:
-    PASS = -1
+    PASS = -1 #holdover from the rest of the codebase
     def __init__(self,route):
         self.establishAuction(route)
 
     def establishAuction(self,route:
         self.auction = Auction()
         for bid in option:
-            auction.nextBid(bid) #bid is a tuple representing (level, suit) or (Pass, Pass) (or DBL DBL but this is irrelevant for passive agents)
+            auction.nextBid(bid) #bid is a tuple representing (level, suit) or (Pass, Pass) (or DBL DBL but this is irrelevant for our purposes against passive agents in flow chart form)
             auction.nextBid((PASS,PASS)) #playing against passive opponents
 
 
