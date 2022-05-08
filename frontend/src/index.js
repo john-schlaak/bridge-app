@@ -171,12 +171,12 @@ function BidNode(props) {
             <Delete delete={props.delete} name="Bid Node" />
             <div className="bidNode">
                 <label>
-                    Bid Suit:
-                    <input type="number" value={props.bidSuit} onChange={b => props.setBidSuit(b.target.value)} />
-                </label>
-                <label>
                     Bid Rank:
                     <input type="number" value={props.bidRank} onChange={b => props.setBidRank(b.target.value)} />
+                </label>
+                <label>
+                    Bid Suit:
+                    <input type="text" value={props.bidSuit} onChange={b => props.setBidSuit(b.target.value)} />
                 </label>
                 <div className="rules">
                     {props.rules && props.rules.map(rule =>
@@ -661,7 +661,7 @@ class FlowchartManager extends React.Component {
                 }
             }
         );
-        this.setState("bidNodes", bidNodes);
+        this.setState({"bidNodes": bidNodes});
     }
 
     setKeyCardGroupMax(bidNodeId, ruleId, keyCardGroupId, max) {
@@ -683,7 +683,7 @@ class FlowchartManager extends React.Component {
                 }
             }
         );
-        this.setState("bidNodes", bidNodes);
+        this.setState({"bidNodes": bidNodes});
     }
 
     deleteKeyCardGroup(bidNodeId, ruleId, keyCardGroupId) {
