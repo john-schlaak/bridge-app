@@ -171,8 +171,12 @@ function BidNode(props) {
             <Delete delete={props.delete} name="Bid Node" />
             <div className="bidNode">
                 <label>
-                    Bid:
-                    <input type="number" value={props.bid} onChange={b => props.setBid(b.target.value)} />
+                    Bid Suit:
+                    <input type="number" value={props.bidSuit} onChange={b => props.setBidSuit(b.target.value)} />
+                </label>
+                <label>
+                    Bid Rank:
+                    <input type="number" value={props.bidRank} onChange={b => props.setBidRank(b.target.value)} />
                 </label>
                 <div className="rules">
                     {props.rules && props.rules.map(rule =>
@@ -230,8 +234,10 @@ function Inputs(props) {
                 {props.bidNodes && props.bidNodes.map(bidNode =>
                     <BidNode key={bidNode.id.toString()}
                         id={bidNode.id}
-                        bid={bidNode.bid}
-                        setBid={b => props.setBid(bidNode.id, b)}
+                        bidSuit={bidNode.bidSuit}
+                        setBidSuit={b => props.setBidSuit(bidNode.id, b)}
+                        bidRank={bidNode.bidRank}
+                        setBidRank={b => props.setBidRank(bidNode.id, b)}
                         rules={bidNode.rules}
                         setDestination={(ruleId, destination) => props.setDestination(bidNode.id, ruleId, destination)}
                         setMinTP={(ruleId, minTP) => props.setMinTP(bidNode.id, ruleId, minTP)}
@@ -278,7 +284,8 @@ class FlowchartManager extends React.Component {
     constructor(props) {
         super(props);
         this.addBidNode = this.addBidNode.bind(this);
-        this.setBid = this.setBid.bind(this);
+        this.setBidRank = this.setBidRank.bind(this);
+        this.setBidSuit = this.setBidSuit.bind(this);
         this.deleteBidNode = this.deleteBidNode.bind(this);
         this.addRule = this.addRule.bind(this);
         this.setDestination = this.setDestination.bind(this);
@@ -317,7 +324,8 @@ class FlowchartManager extends React.Component {
             {
                 $push: [{
                         id: _id,
-                        bid: 0,
+                        bidSuit: 0,
+                        bidRank: 1,
                         rules: []
                  }]
             }
@@ -325,12 +333,24 @@ class FlowchartManager extends React.Component {
         this.setState({"bidNodes": bidNodes});
     }
 
-    setBid(bidNodeId, bid) {
+    setBidSuit(bidNodeId, bidSuit) {
         let bidNodes = update(
             this.state.bidNodes,
             {
                 [bidNodeId]: {
-                    bid: {$set: bid}
+                    bidSuit: {$set: bidSuit}
+                }
+            }
+        );
+        this.setState({"bidNodes": bidNodes})
+    }
+
+    setBidRank(bidNodeId, bidRank) {
+        let bidNodes = update(
+            this.state.bidNodes,
+            {
+                [bidNodeId]: {
+                    bidRank: {$set: bidRank}
                 }
             }
         );
@@ -804,7 +824,8 @@ class FlowchartManager extends React.Component {
             <div>
                 <Inputs 
                     bidNodes={this.state.bidNodes}
-                    setBid={(bidNodeId, bid) => this.setBid(bidNodeId, bid)}
+                    setBidRank={(bidNodeId, bidRank) => this.setBidRank(bidNodeId, bidRank)}
+                    setBidSuit={(bidNodeId, bidSuit) => this.setBidSuit(bidNodeId, bidSuit)}
                     setDestination={(bidNodeId, ruleId, destination) => this.setDestination(bidNodeId, ruleId, destination)}
                     setMinTP={(bidNodeId, ruleId, minTP) => this.setMinTP(bidNodeId, ruleId, minTP)}
                     setMaxTP={(bidNodeId, ruleId, maxTP) => this.setMaxTP(bidNodeId, ruleId, maxTP)}
