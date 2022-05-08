@@ -13,12 +13,12 @@ def generate():
     ## BEGIN YOUR CODE
 #     output = "\ngraph TD\nA[Client] --> B[Load Balancer]\nB --> C[Server1]\nB --> D[Server2]" # PLACEHOLDER
     output = ""
-    for node in bidNodes:
-        node = str(node.id) + "{"+str(node.bidName)+"}"
-        output+=node+"\n"
+    for node in data["bidNodes"]:
+        node_str = str(node["id"]) + "{"+str(node["bidLevel"])+str(node["bidSuit"])+"}"
+        output+=node_str+"\n"
         for rule in node.rules:
-            rule = str(node.id)+"--> |"+"HCP: "+ str(rule.HCPMin)+"-"+str(rule.HCPMax) + "\nTP: "+ str(rule.TPMin)+"-"+str(rule.TPMax) {+" "+str(group.cards)+" "+str(group.num)for group in rule.groups}"|" +rule.nextBid
-            ouput+=rule+"\n"
+            rule_str = str(node["id"])+"--> |"+"HCP: "+ str(rule["minHCP"])+"-"+str(rule["maxHCP"]) + "TP: "+ str(rule["minTP"])+"-"+str(rule["maxTP"]) + [" "+", ".join([str(card["rank"]) + str(card["suit"]) for card in group["cards"]])+" Range: "+str(group["min"]) + "-" + str(group["max"]) for group in rule["keyCardGroups"]] + "|" +rule["destination"]
+            ouput+=rule_str+"\n"
     print(data) # PLACEHOLDER
     ## END YOUR CODE
     return output
